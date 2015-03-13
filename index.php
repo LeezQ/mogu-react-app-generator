@@ -26,7 +26,7 @@
 
 
 <script src="/node_modules/react/dist/react.js"></script>
-<script src="/app/base/js/jquery-2.1.3.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/node_modules/mogu-lotus-proxy/proxy.js"></script>
 
 <?php include('./simple_route.php'); ?>

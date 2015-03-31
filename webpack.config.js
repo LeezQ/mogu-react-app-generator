@@ -18,6 +18,7 @@ module.exports = {
             'base_path': path.resolve(__dirname + '/app/base'),
             'page_path': path.resolve(__dirname + '/app/page'),
             'module_path': path.resolve(__dirname + '/app/module'),
+            'template_path': path.resolve(__dirname + '/app/template'),
         }
     },
     module: {

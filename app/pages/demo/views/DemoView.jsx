@@ -4,7 +4,7 @@
  */
 var React = require('react');
 
-var Tempalte = require('../../../template/Template.jsx');
+var Tempalte = require('template_path/Template.jsx');
 
 
 var ContentView = React.createClass({

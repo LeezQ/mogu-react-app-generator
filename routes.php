@@ -1,0 +1,1 @@
+<?php return array("/demo"=>"/dist/src/demo.js",);

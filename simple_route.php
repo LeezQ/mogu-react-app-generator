@@ -5,24 +5,28 @@
      * @return boolean      [description]
      */
 
-    function isRoute($str) {
-        $url = explode('/react', $_SERVER['REQUEST_URI']);
-        if (empty($url[1])) {
-            echo '你到火星了！呜呜~';die;
-        }
-        $route = $url[1];
-        $routeReg = str_replace('/', '\\/', $str);
-        $routeReg = str_replace('?', '\\?', $routeReg);
-        return preg_match("/".$routeReg."/", $route);
+$baseUrl = '';
+
+$routes = require('./routes.php');
+
+$isRouteHit = false;
+foreach ($routes as $route => $path) {
+    if (isRoute($route)) {
+        $jsFile = $path;
+        $isRouteHit = true;
+        break;
     }
-    $baseUrl = '';
+}
 
-    if (isRoute("/demo")) {
-        // 添加活动报名页面
-        $jsFile = $baseUrl . '/dist/src/page_demo.js';
+if (!$isRouteHit) {
+    echo '你到火星啦~';
+    die;
+}
 
-    } else {
-        echo '你到火星啦~'; die;
-    }
-
- ?>
+function isRoute($str)
+{
+    $route = $_SERVER['REQUEST_URI'];
+    $routeReg = str_replace('/', '\\/', $str);
+    $routeReg = str_replace('?', '\\?', $routeReg);
+    return preg_match("/^" . $routeReg . "\/?((\?|#).+)?$/i", $route);
+}

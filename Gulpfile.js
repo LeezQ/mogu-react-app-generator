@@ -39,6 +39,28 @@ gulp.task('js', function() {
 
 });
 
+
+gulp.task('jsone', function() {
+    var arguments = process.argv.splice(3);
+    if (arguments[0] == '-f') {
+        console.log(arguments[1]);
+        gulp.src('./' + arguments[1])
+            .pipe(streamify(uglify()))
+            .pipe(gulp.dest('./dist/'))
+    };
+});
+
+
+gulp.task('cssone', function() {
+    var arguments = process.argv.splice(3);
+    if (arguments[0] == '-f') {
+        console.log(arguments[1]);
+        gulp.src('./' + arguments[1])
+            .pipe(minifyCss())
+            .pipe(gulp.dest('./dist/'))
+    };
+});
+
 gulp.task('svn', ['js'], function() {
 
     var t = new Date().getTime();

@@ -44,6 +44,8 @@ html
   head
     meta(charset="UTF-8")
     title= title
+    script(src="/dist/src/base_css.js")
+
   body
     script.
       var data = {

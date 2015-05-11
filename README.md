@@ -1,6 +1,5 @@
-### Mogu react app generator
+### Mogu react app generator for node server version
 
-### react app generator for node server version
 #### how to use ?
 ```
     # 安装相关的 node 工具
@@ -11,7 +10,7 @@
 
 ```
 
-#### how to run ?
+#### run it !
 
 ```
     # 安装包

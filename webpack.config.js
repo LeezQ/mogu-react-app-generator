@@ -58,7 +58,7 @@ fileDirList.forEach(function(dirName) {
     var viewFile = [PAGE_ROOT_PATH, dirName, viewName + 'View.jsx'].join('/');
     if (fs.existsSync(viewFile)) {
         entries[dirName] = viewFile;
-        routes += '"/' + dirName.replace(/\-/g, '') + '"' + '=>"' + [DIST_PATH, dirName + '.js'].join('/') + '",';
+        routes += '"/' + dirName.replace(/\-/g, '') + '"' + ':["' + [DIST_PATH, dirName + '.js'].join('/') + '"],';
     }
 });
 
@@ -67,8 +67,8 @@ fileDirList.forEach(function(dirName) {
  * 写入 js 到 routes.php 文件
  * @type {String}
  */
-routes = '<?php return array(' + routes + ');';
-fs.writeFile('./routes.php', routes, function (err) {
+routes = 'var routesMap = { \n ' + routes + ' \n} \nmodule.exports = routesMap;';
+fs.writeFile('./site/routes/routes.js', routes, function (err) {
     if (err) {
         console.error(err);
     }

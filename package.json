@@ -43,7 +43,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "webpack --progress --colors --watch", 
-    "pack-server": " webpack-dev-server --progress --colors --watch" 
+    "server": "nodemon ./site/bin/www"
   },
   "author": "",
   "license": "ISC"

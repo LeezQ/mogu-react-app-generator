@@ -42,3 +42,31 @@ npm install
 
 
 ```
+
+### 修改site/views/index.jade
+
+```
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title= title
+  body
+    script.
+      var data = {
+      "name": "hello",
+      "typelist": [12,3,21,3]
+      }
+
+    #body_wrap
+      .container-fluid
+        #nav
+        .content-wrap.clearfix
+          #sidebar.sidebar.fl
+          #content.content.fl
+    script(src="/node_modules/react/dist/react.js")
+    script(src="/node_modules/jquery/dist/jquery.min.js")
+    script(src="/node_modules/mogu-lotus-proxy/proxy.js")
+    script(src=scripts[0])
+    
+```

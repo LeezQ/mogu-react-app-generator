@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title= title
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" media="(device-height: 568px)" />
+    script(src="/dist/src/base_css.js")
+
+  body
+    script.
+      var data = {
+      "name": "hello",
+      "typelist": [12,3,21,3]
+      }
+
+    #body_wrap
+      .container-fluid
+        #nav
+        .content-wrap.clearfix
+          #sidebar.sidebar.fl
+          #content.content.fl
+    script(src="/node_modules/react/dist/react.js")
+    script(src="/node_modules/jquery/dist/jquery.min.js")
+    script(src="/node_modules/mogu-lotus-proxy/proxy.js")
+    script(src=scripts[0])

@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 
 var PAGE_ROOT_PATH = './app/pages',
+    TEMPLATE_ROOT_PATH = './app/template',
     DIST_PATH = '/dist/src';
 
 /**
@@ -73,6 +74,8 @@ fs.writeFile('./site/routes/routes.js', routes, function (err) {
         console.error(err);
     }
 });
+
+entries.base_css = [TEMPLATE_ROOT_PATH, 'base.less.js'].join('/');
 
 module.exports = {
 

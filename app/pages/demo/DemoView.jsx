@@ -6,12 +6,13 @@ var React = require('react');
 
 var Tempalte = require('template_path/Template.jsx');
 
+require('./style/demo.less');
 
 var ContentView = React.createClass({
 
     render: function() {
         return (
-            <div>
+            <div className="demo">
                 Page Demo Content.
             </div>
         );

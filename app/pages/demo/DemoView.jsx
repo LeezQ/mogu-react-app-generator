@@ -6,7 +6,7 @@ var React = require('react');
 
 var Tempalte = require('template_path/Template.jsx');
 
-require('./style/demo.less');
+require('./style/index.less');
 
 var ContentView = React.createClass({
 

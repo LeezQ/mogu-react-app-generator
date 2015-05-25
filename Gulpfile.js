@@ -65,6 +65,15 @@ gulp.task('cssone', function() {
     };
 });
 
+
+gulp.task('addpage', function() {
+    var arguments = process.argv.splice(3);
+    if (arguments[0] == '-f') {
+        console.log(arguments[1]);
+        exec('cp -r app/pages/demo app/pages/' + arguments[1]);
+    };
+});
+
 gulp.task('svn', ['js'], function() {
 
     var t = new Date().getTime();

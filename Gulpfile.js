@@ -14,6 +14,9 @@ var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
 
+var minifyCss = require('gulp-minify-css');
+var less = require('gulp-less');
+
 var rootPath = './dist/src';
 
  var svnPath = ''; // 这里是本地的 svn 地址
@@ -56,6 +59,7 @@ gulp.task('cssone', function() {
     if (arguments[0] == '-f') {
         console.log(arguments[1]);
         gulp.src('./' + arguments[1])
+            .pipe(less())
             .pipe(minifyCss())
             .pipe(gulp.dest('./dist/'))
     };

@@ -76,15 +76,17 @@ var routesMap = require('./routes');
 
 for (var key in routesMap) {
     /* GET home page. */
-    if (routesMap.hasOwnProperty(key)) {
-        router.get(key, function(req, res, next) {
+    (function(key) {
+      if (routesMap.hasOwnProperty(key)) {
+          router.get(key, function(req, res, next) {
 
-          res.render('index', { 
-                title: 'Express',
-                scripts: routesMap[key]
-            });
-        });
-    };
+            res.render('index', { 
+                  title: 'Express',
+                  scripts: routesMap[key]
+              });
+          });
+      };
+    })(key);
 
 }
 

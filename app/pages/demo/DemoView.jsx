@@ -2,18 +2,27 @@
  * [React description]
  * @type {[type]}
  */
-var React = require('react');
+// var React = require('react');
 
-var Tempalte = require('template_path/Template.jsx');
+import React from 'react';
+import Template from 'template_path/Template.jsx';
 
-require('./style/index.less');
+import './style/index.less';
+
+class HelloWorld extends React.Component {
+    render() {
+       return <p>Hello, world!</p>;
+    }
+}
 
 var ContentView = React.createClass({
 
-    render: function() {
+    render: function(y=12) {
+        let a = 123;
         return (
             <div className="demo">
-                Page Demo Content.
+                <HelloWorld />
+                Page Demo ssContent. {a} {y}!
             </div>
         );
     }
@@ -22,7 +31,7 @@ var ContentView = React.createClass({
 
 
 React.render(
-    <Tempalte 
+    <Template 
         content={<ContentView />} />
     , document.body
     );

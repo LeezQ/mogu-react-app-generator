@@ -105,7 +105,7 @@ module.exports = {
         loaders: [
             { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
             { test: /\.css$/, loader: "style!css" },
-            {test: /\.jsx?$/,
+            {test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel'
             },

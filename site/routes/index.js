@@ -3,13 +3,15 @@ var router = express.Router();
 
 var routesMap = require('./routes');
 
+
 for (var key in routesMap) {
     /* GET home page. */
     (function(key) {
       if (routesMap.hasOwnProperty(key)) {
+
           router.get(key, function(req, res, next) {
 
-            res.render('index', { 
+            res.render('layout', { 
                   title: 'Express',
                   scripts: routesMap[key]
               });

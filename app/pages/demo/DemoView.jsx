@@ -9,29 +9,26 @@ import Template from 'template_path/Template.jsx';
 
 import './style/index.less';
 
-class HelloWorld extends React.Component {
-    render() {
-       return <p>Hello, world!</p>;
-    }
-}
-
-var ContentView = React.createClass({
-
-    render: function(y=12) {
-        let a = 123;
+var Domo = React.createClass({
+    render: function() {
         return (
-            <div className="demo">
-                <HelloWorld />
-                Page Demo ssContent. {a} {y}!
+            <div>
+                hello world !
+                <a href="javascript:;" onClick={this.load_info}>load info...</a>
             </div>
         );
+    },
+
+    load_info: function() {
+        $('body').append(`<div id="load_info"></div>`);
+        var load = require("bundle?name=domo!./Domo.jsx");
+        load(function(file) { });
     }
 
 });
 
-
 React.render(
-    <Template 
-        content={<ContentView />} />
+    <Template
+        content={<Domo />} />
     , document.body
     );

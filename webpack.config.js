@@ -6,7 +6,7 @@ var PAGE_ROOT_PATH = './app/pages',
     DIST_PATH = '/dist/src';
 
 /**
- * 首字母大写转换 
+ * 首字母大写转换
  *     1、/pages/demo/edit 转换为  DemoEdit
  *     2、支持 /pages/date-time-picker 转换为 DateTimePicker
  * @param  {[type]} str [description]
@@ -35,7 +35,7 @@ function travelDir(dir, callback) {
 
         if (fs.statSync(pathName).isDirectory()) { // 如果有二级目录
             var dirName = pathName.replace('app/pages/', '');
-            if ( dirName.indexOf('/style') < 0 
+            if ( dirName.indexOf('/style') < 0
                 && dirName.indexOf('/stores') < 0 ) {
                 fileDirList.push(dirName);
             }
@@ -85,7 +85,7 @@ module.exports = {
         path: 'dist/src' ,
         filename: "[name].js",
         chunkFilename: "[name].js",
-        //publicPath: "/activity2-0/dist/src/"
+        publicPath: "/dist/src/"
     },
     externals: {
       'react': 'window.React',

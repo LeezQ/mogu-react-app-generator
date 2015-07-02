@@ -3,7 +3,6 @@ var router = express.Router();
 
 var routesMap = require('./routes');
 
-
 for (var key in routesMap) {
     /* GET home page. */
     (function(key) {

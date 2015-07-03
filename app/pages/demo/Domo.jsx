@@ -6,14 +6,12 @@ var HelloWorld = React.createClass({
         return (
             <div className="domo-loading">
                 hellow loading here ! <br />
-                hellow loading here !
+            hellow loading here ! <br />
+        {Math.random()}
             </div>
         );
     }
 
 });
 
-React.render(
-    <HelloWorld />
-    , document.getElementById('load_info')
-    );
+module.exports = HelloWorld;

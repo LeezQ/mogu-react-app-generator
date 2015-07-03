@@ -2,14 +2,12 @@
  * [React description]
  * @type {[type]}
  */
-// var React = require('react');
-
 import React from 'react';
 import Template from 'template_path/Template.jsx';
 
 import './style/index.less';
 
-var Domo = React.createClass({
+var Demo = React.createClass({
     render: function() {
         return (
             <div>
@@ -20,15 +18,22 @@ var Domo = React.createClass({
     },
 
     load_info: function() {
-        $('body').append(`<div id="load_info"></div>`);
-        var load = require("bundle?name=domo!./Domo.jsx");
-        load(function(file) { });
+        var Domo = require("bundle?name=domo!./Domo.jsx");
+        Domo(function(Domo) {
+            if ($('#load_info').length <= 0) {
+                $('body').append(`<div id="load_info"></div>`);
+            }
+            React.render(
+                <Domo />
+                , document.getElementById('load_info')
+                );
+        });
     }
 
 });
 
 React.render(
     <Template
-        content={<Domo />} />
+        content={<Demo />} />
     , document.body
     );

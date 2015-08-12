@@ -29,10 +29,15 @@ var Demo = React.createClass({
                 i = 0;
             }
 
-            prev = i == 0 ? length - 1 : i - 1;
+            if (i == 0) {
+                prev = length - 1;
+            } else {
+                prev = i - 1;
+            }
+            console.log(prev);
 
-            img.eq(prev).removeClass('fadeIn').addClass('fadeOut');
-            img.eq(i).removeClass('fadeOut').addClass('fadeIn');
+            img.eq(prev).fadeOut(3000);
+            img.eq(i).fadeIn(4000);
 
             setTimeout(() => {
                 i++;
@@ -43,7 +48,7 @@ var Demo = React.createClass({
 
         setTimeout(() => {
             imgShow(i);
-        }, 1500)
+        }, 1000)
 
 
 

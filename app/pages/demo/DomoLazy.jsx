@@ -6,8 +6,9 @@ var HelloWorld = React.createClass({
         return (
             <div className="domo-loading">
                 hellow loading here ! <br />
-            hellow loading here ! <br />
-        {Math.random()}
+                hellow loading here ! <br />
+                hellow loading here ! <br />
+                {Math.random()}
             </div>
         );
     }

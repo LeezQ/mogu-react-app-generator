@@ -1,6 +1,12 @@
 var fs = require('fs');
 var path = require('path');
 
+var PathOrderPlugin = require('path-order-webpack-plugin');
+
+var notifier = require('node-notifier');
+var WebpackOnBuildPlugin = require('on-build-webpack');
+
+
 var PAGE_ROOT_PATH = './app/pages',
     TEMPLATE_ROOT_PATH = './app/template',
     DIST_PATH = '/dist/src';
@@ -47,6 +53,26 @@ function travelDir(dir, callback) {
 }
 
 travelDir(PAGE_ROOT_PATH, function(){});
+
+/**
+ * 通知
+ * @param  {[type]} title   [description]
+ * @param  {[type]} message [description]
+ * @param  {[type]} sound   [description]
+ * @return {[type]}         [description]
+ */
+function pushNotification(title, message, sound) {
+    sound = sound || false;
+
+    notifier.notify({
+        title: title,
+        message: message,
+        sound: sound
+    }, function (err, respond) {
+        if (err) console.error(err);
+    });
+}
+
 
 
 var entries = {}, routes = '';
@@ -105,11 +131,35 @@ module.exports = {
         loaders: [
             { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
             { test: /\.css$/, loader: "style!css" },
+
+
             {test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
                 loader: 'babel'
             },
             { test: /\.(jpg|png)$/, loader: "file-loader?name=[path][name].[ext]" }
         ]
-    }
+    },
+
+    plugins: [
+        new PathOrderPlugin(),
+
+        new WebpackOnBuildPlugin(function(stats) {
+            var compilation = stats.compilation;
+            var errors = compilation.errors;
+            if (errors.length > 0) {
+                var error = errors[0];
+                pushNotification(error.name, error.message, 'Glass');
+            }
+            else {
+                var message = 'takes ' + (stats.endTime - stats.startTime) + 'ms';
+
+                var warningNumber = compilation.warnings.length;
+                if (warningNumber > 0) {
+                    message += ', with ' + warningNumber + ' warning(s)';
+                }
+
+                pushNotification('webpack building done', message);
+            }
+        })
+    ]
 };

@@ -4,3 +4,77 @@
     background-color: @color-primary-dark;
     color: #eee;
 }
+
+.img-wrap {
+
+    div {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        position: absolute;
+        top: 0;
+
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        display: none;
+    }
+
+
+    img {
+        display: none;
+        width: 100%;
+
+    }
+
+    .is-show {
+        display: inline-block;
+    }
+}
+
+.bottom-wrap {
+    margin-top: 100%;
+}
+
+.month {
+
+    padding: 10px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid #eee;
+    .day {
+        font-size: 46px;
+        line-height: 44px;
+        color: #333;
+        font-style: normal;
+        font-weight: bold;
+        margin-right: 5px;
+        font-family: 'sans-serif';
+    }
+}
+.year {
+    overflow: hidden;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.location {
+    padding: 10px;
+    color: #999;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+}
+
+
+.title {
+    font-size: 22px;
+    border-bottom: 1px dashed #eee;
+    padding: 10px;
+}
+
+.desc {
+    font-size: 18px;
+    line-height: 26px;
+    color: #666;
+    padding: 10px;
+}

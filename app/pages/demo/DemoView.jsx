@@ -36,13 +36,13 @@ var Demo = React.createClass({
             }
             console.log(prev);
 
-            img.eq(prev).fadeOut(2000);
-            img.eq(i).fadeIn(2000);
+            img.eq(prev).fadeOut(3000);
+            img.eq(i).fadeIn(4000);
 
             setTimeout(() => {
                 i++;
                 imgShow(i);
-            }, 2000)
+            }, 4000)
 
         }
 

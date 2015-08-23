@@ -7,8 +7,8 @@ var notifier = require('node-notifier');
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
 
-var PAGE_ROOT_PATH = './app/pages',
-    TEMPLATE_ROOT_PATH = './app/template',
+var PAGE_ROOT_PATH = './pages',
+    TEMPLATE_ROOT_PATH = './template',
     DIST_PATH = '/dist/src';
 
 /**
@@ -95,7 +95,7 @@ fileDirList.forEach(function(dirName) {
  * @type {String}
  */
 routes = 'var routesMap = { \n ' + routes + ' \n} \nmodule.exports = routesMap;';
-fs.writeFile('./site/routes/routes.js', routes, function (err) {
+fs.writeFile('../site/routes/routes.js', routes, function (err) {
     if (err) {
         console.error(err);
     }
@@ -121,10 +121,10 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'base_path': path.resolve(__dirname + '/app/base'),
-            'page_path': path.resolve(__dirname + '/app/pages'),
-            'module_path': path.resolve(__dirname + '/app/module'),
-            'template_path': path.resolve(__dirname + '/app/template'),
+            'base_path': path.resolve(__dirname + '/base'),
+            'page_path': path.resolve(__dirname + '/pages'),
+            'module_path': path.resolve(__dirname + '/module'),
+            'template_path': path.resolve(__dirname + '/template'),
         }
     },
     module: {

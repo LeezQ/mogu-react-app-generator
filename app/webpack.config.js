@@ -114,10 +114,12 @@ module.exports = {
         publicPath: "/dist/src/"
     },
     externals: {
-      'react': 'window.React',
-      'react/addons': 'window.React',
-      'jquery': 'window.jQuery',
-      'jQuery': 'window.jQuery'
+	'react': 'window.React',
+	'react/addons': 'window.React',
+	'jquery': 'window.jQuery',
+	'jQuery': 'window.jQuery',
+	'underscore': 'window._',
+	'pubsub-js': 'window.PubSub',
     },
     resolve: {
         alias: {

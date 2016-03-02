@@ -40,7 +40,7 @@ function travelDir(dir, callback) {
         var pathName = path.join(dir, fileName);
 
         if (fs.statSync(pathName).isDirectory()) { // 如果有二级目录
-            var dirName = pathName.replace('app/pages/', '');
+            var dirName = pathName.replace('pages/', '');
             if ( dirName.indexOf('/style') < 0
                 && dirName.indexOf('/stores') < 0 ) {
                 fileDirList.push(dirName);
@@ -135,8 +135,13 @@ module.exports = {
             { test: /\.css$/, loader: "style!css" },
 
 
-            {test: /\.(js|jsx)$/,
-                loader: 'babel'
+            {
+                test: /\.jsx?$/,
+                  exclude: /(node_modules|bower_components)/,
+                  loader: 'babel', // 'babel-loader' is also a legal name to reference
+                  query: {
+                    presets: ['react', 'es2015']
+                  }
             },
             { test: /\.(jpg|png)$/, loader: "file-loader?name=[path][name].[ext]" }
         ]

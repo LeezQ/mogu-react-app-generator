@@ -1,12 +1,18 @@
 var fs = require('fs');
 var path = require('path');
 
-var PAGE_ROOT_PATH = './app/pages',
-    TEMPLATE_ROOT_PATH = './app/template',
+var PathOrderPlugin = require('path-order-webpack-plugin');
+
+var notifier = require('node-notifier');
+var WebpackOnBuildPlugin = require('on-build-webpack');
+
+
+var PAGE_ROOT_PATH = './pages',
+    TEMPLATE_ROOT_PATH = './template',
     DIST_PATH = '/dist/src';
 
 /**
- * 首字母大写转换 
+ * 首字母大写转换
  *     1、/pages/demo/edit 转换为  DemoEdit
  *     2、支持 /pages/date-time-picker 转换为 DateTimePicker
  * @param  {[type]} str [description]
@@ -34,8 +40,8 @@ function travelDir(dir, callback) {
         var pathName = path.join(dir, fileName);
 
         if (fs.statSync(pathName).isDirectory()) { // 如果有二级目录
-            var dirName = pathName.replace('app/pages/', '');
-            if ( dirName.indexOf('/style') < 0 
+            var dirName = pathName.replace('pages/', '');
+            if ( dirName.indexOf('/style') < 0
                 && dirName.indexOf('/stores') < 0 ) {
                 fileDirList.push(dirName);
             }
@@ -47,6 +53,26 @@ function travelDir(dir, callback) {
 }
 
 travelDir(PAGE_ROOT_PATH, function(){});
+
+/**
+ * 通知
+ * @param  {[type]} title   [description]
+ * @param  {[type]} message [description]
+ * @param  {[type]} sound   [description]
+ * @return {[type]}         [description]
+ */
+function pushNotification(title, message, sound) {
+    sound = sound || false;
+
+    notifier.notify({
+        title: title,
+        message: message,
+        sound: sound
+    }, function (err, respond) {
+        if (err) console.error(err);
+    });
+}
+
 
 
 var entries = {}, routes = '';
@@ -69,7 +95,7 @@ fileDirList.forEach(function(dirName) {
  * @type {String}
  */
 routes = 'var routesMap = { \n ' + routes + ' \n} \nmodule.exports = routesMap;';
-fs.writeFile('./site/routes/routes.js', routes, function (err) {
+fs.writeFile('../site/routes/routes.js', routes, function (err) {
     if (err) {
         console.error(err);
     }
@@ -85,31 +111,62 @@ module.exports = {
         path: 'dist/src' ,
         filename: "[name].js",
         chunkFilename: "[name].js",
-        //publicPath: "/activity2-0/dist/src/"
+        publicPath: "/dist/src/"
     },
     externals: {
-      'react': 'window.React',
-      'react/addons': 'window.React',
-      'jquery': 'window.jQuery',
-      'jQuery': 'window.jQuery'
+	'react': 'window.React',
+	'react/addons': 'window.React',
+	'jquery': 'window.jQuery',
+	'jQuery': 'window.jQuery',
+	'underscore': 'window._',
+	'pubsub-js': 'window.PubSub',
     },
     resolve: {
         alias: {
-            'base_path': path.resolve(__dirname + '/app/base'),
-            'page_path': path.resolve(__dirname + '/app/pages'),
-            'module_path': path.resolve(__dirname + '/app/module'),
-            'template_path': path.resolve(__dirname + '/app/template'),
+            'base_path': path.resolve(__dirname + '/base'),
+            'page_path': path.resolve(__dirname + '/pages'),
+            'module_path': path.resolve(__dirname + '/module'),
+            'template_path': path.resolve(__dirname + '/template'),
         }
     },
     module: {
         loaders: [
             { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
             { test: /\.css$/, loader: "style!css" },
-            {test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel'
+
+
+            {
+                test: /\.jsx?$/,
+                  exclude: /(node_modules|bower_components)/,
+                  loader: 'babel', // 'babel-loader' is also a legal name to reference
+                  query: {
+                    presets: ['react', 'es2015']
+                  }
             },
             { test: /\.(jpg|png)$/, loader: "file-loader?name=[path][name].[ext]" }
         ]
-    }
+    },
+
+    plugins: [
+        new PathOrderPlugin(),
+
+        new WebpackOnBuildPlugin(function(stats) {
+            var compilation = stats.compilation;
+            var errors = compilation.errors;
+            if (errors.length > 0) {
+                var error = errors[0];
+                pushNotification(error.name, error.message, 'Glass');
+            }
+            else {
+                var message = 'takes ' + (stats.endTime - stats.startTime) + 'ms';
+
+                var warningNumber = compilation.warnings.length;
+                if (warningNumber > 0) {
+                    message += ', with ' + warningNumber + ' warning(s)';
+                }
+
+                pushNotification('webpack building done', message);
+            }
+        })
+    ]
 };

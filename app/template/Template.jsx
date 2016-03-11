@@ -4,9 +4,7 @@ var Template = React.createClass({
 
     render: function() {
         return (
-            <div className="body-wrap" id="body-wrap"> 
-                Template
-
+            <div className="body-wrap" id="body-wrap">
                 {this.props.content}
             </div>
         );

@@ -17,13 +17,11 @@
     npm install
 
     # 创建站点
-    express site
-    cd site
     npm install
 
     # 修改 site/app.js
     app.use(express.static(path.join(__dirname, 'public'))); 
-    => app.use(express.static(path.join(__dirname, '../'))); // 指向到根目录
+    => app.use(express.static(path.join(__dirname, '../app/'))); // 指向到app目录，app目录为前端目录
 
 
     # 跑起来
@@ -37,7 +35,7 @@
 ```
 
 
-#### 修改 routes/index.js
+#### 路由和目录自动匹配，如果只是做前端相关页面，建议直接使用路由匹配功能，方法如下：修改 routes/index.js
 
 ```
 var express = require('express');
